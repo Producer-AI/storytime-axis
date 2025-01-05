@@ -13,6 +13,7 @@ struct ContentView: View {
   //  @Query private var items: [Item]
   @State var selectedTab = StorytimeTab.avatarHome
   @State var isCreateAvatarViewPresented = false
+  @State var isCreateStoryViewPresented = false
 
   var body: some View {
     ZStack(alignment: .init(horizontal: .center, vertical: .bottom)) {
@@ -34,6 +35,7 @@ struct ContentView: View {
         }
 
         Button {
+          isCreateStoryViewPresented = true
         } label: {
           Text("Create Story")
           Image(systemName: StorytimeTab.bookHome.imageName)
@@ -52,6 +54,9 @@ struct ContentView: View {
     }
     .sheet(isPresented: $isCreateAvatarViewPresented) {
       CreateAvatarView()
+    }
+    .sheet(isPresented: $isCreateStoryViewPresented) {
+      CreateStoryView {}
     }
   }
 

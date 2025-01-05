@@ -13,6 +13,7 @@ struct AvatarHomeView: View {
   @State var searchText = ""
   @State var selectedCategories: Set<StorytimeCategory> = [.all]
   @State var isCreateAvatarViewPresented = false
+  @State var isCreateStoryViewPresented: Bool = false
 
   var body: some View {
     NavigationStack(path: $navigationPath) {
@@ -176,7 +177,7 @@ struct AvatarHomeView: View {
           .clipShape(RoundedRectangle(cornerRadius: 20))
           .padding()
           .onTapGesture {
-            isCreateAvatarViewPresented = true
+            isCreateStoryViewPresented = true
           }
         }
         .listRowBackground(Color.clear)
@@ -184,8 +185,8 @@ struct AvatarHomeView: View {
         .listRowInsets(EdgeInsets())
       }
       .listStyle(.plain)
-      .sheet(isPresented: $isCreateAvatarViewPresented) {
-        CreateAvatarView()
+      .sheet(isPresented: $isCreateStoryViewPresented) {
+        CreateStoryView {}
       }
       .navigationDestination(for: String.self) { item in
         switch item {
