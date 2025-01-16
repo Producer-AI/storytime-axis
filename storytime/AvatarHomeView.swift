@@ -93,8 +93,7 @@ struct AvatarHomeView: View {
             HStack {
               ForEach(MOCK_DATA.favoriteTitles, id: \.self) { imageName in
                 NavigationLink {
-                  Image(imageName)
-                    .resizable()
+                  StoryPlayerView(imageName: imageName)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .aspectRatio(contentMode: .fit)
                     .ignoresSafeArea()
@@ -132,8 +131,7 @@ struct AvatarHomeView: View {
               HStack {
                 ForEach(MOCK_DATA.bookTitles, id: \.self) { imageName in
                   NavigationLink {
-                    Image(imageName)
-                      .resizable()
+                    StoryPlayerView(imageName: imageName)
                       .frame(maxWidth: .infinity, maxHeight: .infinity)
                       .aspectRatio(contentMode: .fit)
                       .ignoresSafeArea()
