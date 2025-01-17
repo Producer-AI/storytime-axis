@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
 
 struct CreateStoryView: View {
+  let db = Firestore.firestore()
   let completion: () -> Void
 
   @State var storyTitle = ""
@@ -15,6 +17,25 @@ struct CreateStoryView: View {
 
   init(_ completion: @escaping () -> Void) {
     self.completion = completion
+  }
+
+  func saveStory() {
+    db.collection("personalities").addDocument(data: [
+      "category": "story_time",
+      "name": storyTitle,
+      "subtitle": "User's name",
+      "transcript": storyBody,
+      "createdAt": Date(),
+      "updatedAt": Date(),
+    ]) {
+      error in
+      if let error = error {
+        print("Error saving story: \(error)")
+      } else {
+        print("Story saved successfully")
+        completion()
+      }
+    }
   }
 
   var body: some View {
@@ -78,7 +99,7 @@ struct CreateStoryView: View {
         }
 
         Button {
-          completion()
+          saveStory()
         } label: {
           Text("Submit")
             .foregroundStyle(.black)
